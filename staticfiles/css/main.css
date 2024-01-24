@@ -1,0 +1,169 @@
+@import url(https://use.fontawesome.com/releases/v6.1.2/css/all.css);
+
+html {
+    font-family: Ubuntu, sans-serif;
+}
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 3rem;
+    margin: 0.8rem auto;
+}
+.brand {
+    display: flex;
+    align-items:last baseline;
+    gap: 2rem;
+}
+ul li {
+    display: inline-block;
+    width: 120px;
+    height: 50px;
+    text-align: center;
+    padding: 12px;
+    background-color: rgb(230, 227, 227);
+}
+a {
+    text-decoration: none;
+    color: rgb(141, 137, 137);
+    gap: 4px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+.brand h6 {
+    font-size: 0.6rem;
+    color: grey;
+}
+.brand h1 {
+    font-size: 1.9rem;
+    border-right: 1px solid rgb(111, 110, 110);
+    padding-right: 2rem;
+    color: #1b1b1b;
+}
+nav ul li:nth-child(1) {
+    background-color: #56DBB1;
+}
+nav ul li:nth-child(1) a {
+    color: black;
+}
+header div:last-child {
+    background-color: #56DBB1;
+    text-align: center;
+}
+header div:last-child p {
+    font-size: 0.8rem;
+    padding: 2.4rem 8rem;
+    font-weight: bold;
+}
+.logos {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    width: 100%;
+    background-color: rgb(56 56 56);
+    height: 320px;
+    color: #fff;
+}
+.article {
+    padding-top: 4rem;
+    width: 24%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.icon {
+     box-sizing: border-box;
+     width: 40%;
+     margin: 0 auto 1rem auto;
+     padding: .8rem 0;
+     font-size: 2rem;
+     background-color: #56DBB1;
+    }
+.article h2 {
+     font-size: 0.8rem;
+     padding-bottom: 1.2rem;
+     margin-bottom: 1.2rem;
+     border-bottom: 1px solid rgb(249, 246, 246);
+    }
+.article p {
+     font-size: .7rem;
+     color: rgb(114, 114, 114);
+     font-weight: 600;
+    }
+
+/*.maecenas {*/
+/*     height: 600px;*/
+/*    }*/
+/*.top, .bottom {*/
+/*    height: 50%;*/
+/*    }*/
+/*.top {*/
+/*    box-sizing: border-box;*/
+/*    text-align: center;*/
+/*    padding: 4rem 2rem;*/
+/*    }*/
+/*.top h2 {*/
+/*    color: rgb(89, 89, 89);*/
+/*    font-size: 1.8rem;*/
+/*    font-weight: 700;*/
+/*    }*/
+/*.top p {*/
+/*    color: rgb(141, 141, 141);*/
+/*    margin-bottom: 1.8rem;*/
+/*    font-weight: 700;*/
+/*    font-size: 0.9rem;*/
+/*    }*/
+/*.top button {*/
+/*    outline: none;*/
+/*    border: none;*/
+/*    padding: 1rem 3rem;*/
+/*    color: #FFF;*/
+/*    letter-spacing: .18rem;*/
+/*    background-color: #974D1B;*/
+/*    }*/
+/*.top button:hover {*/
+/*    cursor: pointer;*/
+/*    }*/
+/*.bottom {*/
+/*    padding: 4rem;*/
+/*    display: flex;*/
+/*    width: 100%;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    background-color: rgb(56 56 56);*/
+/*    }*/
+/*.bottom .article {*/
+/*    width: 23%;*/
+/*    !* border: 1px solid red; *!*/
+/*    }*/
+/*.bottom h3 {*/
+/*    color: #FFF;*/
+/*    font-size: 1rem;*/
+/*    font-weight: 600;*/
+/*    text-align: center;*/
+/*    margin-bottom: 1.8rem;*/
+/*    }*/
+/*.bottom p {*/
+/*    font-size: .75rem;*/
+/*    color: rgb(114, 114, 114);*/
+/*    text-align: center;*/
+/*    margin-bottom: 1.8rem;*/
+/*    }*/
+
+footer {
+    padding: 4rem;
+    background-color: #1B9772;
+    color: #3BC8A1;
+    text-align: center;
+    font-size: .8rem;
+    font-weight: bold;
+    letter-spacing: .1rem;
+    }
+footer span {
+    font-weight: 400;
+    color: #fff;
+    }

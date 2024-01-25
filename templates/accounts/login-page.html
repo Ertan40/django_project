@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load placeholders %}
+
+
+{% block page_content %}
+
+    <form action="{% url 'login user' %}" method="post">
+        <h3>Login</h3>
+        <p>Username:</p>
+        <input type="text" name="username" id="username" placeholder="Username">
+
+        <p>Password:</p>
+        <input type="password" name="password" id="password" placeholder="Password">
+
+        {% csrf_token %}
+        <div class="login-button">
+            <button>Login</button>
+        </div>
+    </form>
+    <div class="second-option">
+        <p>Don't you have an account? <a href="{% url 'register user' %}">Register</a></p>
+    </div>
+
+
+{% endblock %}

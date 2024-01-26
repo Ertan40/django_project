@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block page_content %}
+    <h1>Admin Site Section</h1>
+    {% if request.user.is_staff %}
+    <ul role="list" class="staff-rights">
+        <li><a href="#">Add staff</a></li>
+        <li><a href="#">Add movie</a></li>
+        <li><a href="#">Add seat</a></li>
+        <li><a href="#">Add projection</a></li>
+        <li><a href="#">Add ticket type</a></li>
+    </ul>
+    {% else %}
+        <h2>You do not have rights.</h2>
+    {% endif %}
+
+{% endblock %}

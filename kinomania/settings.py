@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     #my-apps
     'kinomania.accounts.apps.UserAppConfig',
     'kinomania.common',
+    'kinomania.movies',
 ]
 
 MIDDLEWARE = [

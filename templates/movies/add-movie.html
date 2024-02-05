@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load placeholders %}
+
+
+{% block page_content %}
+
+{% block style %}
+    <style>
+        .logos {
+            height: auto;
+        }
+    </style>
+{% endblock %}
+    <form action="{% url 'add movie' %}" method="post" class="input-forms">
+        <h3>Add new movie</h3>
+        <p>Name:</p>
+        {{ form.name|placeholder:'Name' }}
+        <p>Year:</p>
+        {{ form.year|placeholder:'Year' }}
+        <p>Genres:</p>
+        {{ form.genres|placeholder:'Genres' }}
+        <p>Description:</p>
+        {{ form.description|placeholder:'Description' }}
+        <p>Image:</p>
+        {{ form.image|placeholder:'Image' }}
+        <p>Rating:</p>
+        {{ form.rating|placeholder:'Rating' }}
+        <p>Duration:</p>
+        {{ form.duration|placeholder:'Duration' }}
+        <p>Trailer:</p>
+        {{ form.trailer|placeholder:'Trailer' }}
+        <p>Rdate:</p>
+        {{ form.rdate|placeholder:'Rdate' }}
+        <p>Link to IMDB:</p>
+        {{ form.imdb_link|placeholder:'Link to IMDB' }}
+        <p>Is active:</p>
+        {{ form.is_active|placeholder:'Is active' }}
+{#        {{ form.as_p }}#}
+        {% csrf_token %}
+        <div class="addmovie-button">
+            <button>Add a movie</button>
+        </div>
+
+    </form>
+
+{% endblock %}

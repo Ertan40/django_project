@@ -16,3 +16,14 @@ class Movie(models.Model):
     imdb_link = models.URLField(null=False, blank=False, verbose_name="Link to IMDB")
     slug = models.SlugField(null=False, blank=True, unique=True, editable=False)
     is_active = models.BooleanField(default=True, null=False, blank=False)
+
+    def save(self, *args, **kwargs):
+        # create/update
+        super().save(*args, **kwargs)
+        if not self.slug:
+            self.slug = slugify(f'{self.name}-{self.year}')
+        # update # slug: the-beekeeper-2023
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'{self.name} ({self.year})'

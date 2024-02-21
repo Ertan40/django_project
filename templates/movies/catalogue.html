@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+{% block style %}
+<style>
+   h1 {
+       font-size: 40px;
+   }
+   .card-img-top {
+       width: 220px;
+       height: auto;
+   }
+   .card-title {
+       font-size: 30px;
+   }
+   .card.mb-4.shadow-sm {
+       display: flex;
+       justify-content: space-around;
+       align-items: center;
+       padding: 0.5em;
+   }
+   .card-text {
+       margin: 5px 50px 5px 5px;
+   }
+   .container {
+        background: black;
+    }
+
+</style>
+{%  endblock %}
+
+<div class="container">
+    <h1>Movies</h1>
+    <div class="row">
+        {% for movie in movies %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="{{ movie.image.url }}" class="card-img-top" alt="{{ movie.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ movie.name }}</h5>
+                    <p class="card-text">{{ movie.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="{% url 'movies' movie.pk %}" class="btn btn-sm btn-outline-secondary">View</a>
+                        </div>
+                        <small class="text-muted">{{ movie.year }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+

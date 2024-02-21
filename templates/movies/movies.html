@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load placeholders %}
+
+
+{% block page_content %}
+
+{% block style %}
+<style>
+    .logos {
+            height: auto;
+        }
+    .bg {
+        {#background: linear-gradient(to right, rgba(138, 181, 206, 0), #000),#}
+        {#url({{movies.image.url}});#}
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .bl {
+        background: black;
+    }
+
+    .right-c {
+        margin-top: 150px;
+        color: #fff;
+    }
+
+    .pillow {
+        background: rgba(0, 0, 0, 0.13);
+        border-radius: 50px;
+        color: white;
+        border: solid 1px whitesmoke;
+        padding: 5px 10px;
+        margin: 0 auto;
+        width: 40%;
+    }
+
+    .title {
+        font-size: 50px;
+        padding: 10px 0px;
+    }
+
+    .rate {
+        margin: 10px 0px;
+        margin-left: 30px;
+    }
+
+    .rate i {
+        text-shadow: 0 0 5px white;
+        color: red;
+    }
+    .mx-auto {
+        width: 250px;
+        height: auto;
+        margin: 0 auto;
+    }
+    .desc {
+        margin: 5px 50px 5px 5px;
+    }
+
+    .btn-custom {
+        background: linear-gradient(320deg, blue, red);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        width: 230px;
+        margin: 5px;
+    }
+
+    .btn-custom i {
+        padding: 0px 5px;
+    }
+
+    .btn-custom:hover {
+        color: #fff;
+        border: solid 2px white;
+        background: transparent;
+    }
+
+    .time {
+        margin: 5px;
+        display: inline;
+    }
+</style>
+
+{% endblock %}
+
+   <div class="col-5 bl">
+
+            <div class="row">
+                <div class="col-12 right-c">
+
+                    <img src="{{ movie.image.url }}" alt="{{ movie.name }} - image" class="mx-auto">
+
+                    <h1 class="title">{{movie.name}}</h1>
+                    <h4 class="pillow">{{movie.genres}}</h4>
+                    <h4 style="padding: 5px 0px"> <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        {{movie.duration}} | <i class="fa fa-calendar-o"></i> {{movie.rdate}} </h4>
+                    <p class="desc">{{movie.description}}</p>
+                    <h1 class="rate"> <i class="fa fa-heart"></i> {{movie.rating}} </h1>
+                    <button type="button" id="btn-t" class="btn btn-lg btn-custom">Watch Trailer <i
+                            class="fa fa-play-circle"></i>
+                    </button>
+                    <button type="button" id="btn-time" class="btn btn-lg btn-custom">Book Now <i
+                            class="fa fa-ticket"></i> </button>
+
+                </div>
+            </div>
+   </div>
+
+
+{% endblock %}

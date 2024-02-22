@@ -9,9 +9,10 @@
         .logos {
             height: auto;
         }
+
     </style>
 {% endblock %}
-    <form action="{% url 'add movie' %}" method="post" class="input-forms">
+    <form action="{% url 'edit movie' pk=movie.pk %}" method="post" class="input-forms">
         <h3>Add new movie</h3>
         <p>Name:</p>
         {{ form.name|placeholder:'Name' }}
@@ -38,7 +39,7 @@
 {#        {{ form.as_p }}#}
         {% csrf_token %}
         <div class="addmovie-button">
-            <button>Add movie</button>
+            <button>Edit movie</button>
         </div>
 
     </form>

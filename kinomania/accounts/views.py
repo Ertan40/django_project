@@ -3,8 +3,9 @@ from django.contrib.auth import get_user_model, login
 from django.views import generic as views
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponse
-from kinomania.accounts.forms import UserCreateForm
+from kinomania.accounts.forms import UserCreateForm, UserCreateStaffForm
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 
 UserModel = get_user_model()
 
@@ -37,3 +38,12 @@ class SignInView(LoginView):
 
 class SignOutView(LogoutView):
     next_page = reverse_lazy('index')
+
+
+
+class CreateUpStaffView(PermissionRequiredMixin, views.CreateView):
+    permission_required = 'accounts.add_account'
+    template_name = 'accounts/register-staff-user.html'
+    form_class = UserCreateStaffForm
+    success_url = reverse_lazy('index')
+

@@ -47,3 +47,30 @@ class CreateUpStaffView(PermissionRequiredMixin, views.CreateView):
     form_class = UserCreateStaffForm
     success_url = reverse_lazy('index')
 
+
+class UserDetailsView(views.DetailView):
+    template_name = 'accounts/user-details-page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_owner'] = self.request.user == self.object
+        return context
+
+
+
+class UserEditView(views.UpdateView):
+    template_name = 'accounts/user-edit-page.html'
+    model = UserModel
+    fields = ('first_name', 'last_name', 'email', 'age')
+
+    # def get_success_url(self):
+    #     return reverse_lazy('user details', kwargs={
+    #         'pk': self.request.user.pk
+    #     })
+
+
+class UserDeleteView(views.DeleteView):
+    template_name = 'accounts/user-delete-page.html'
+    model = UserModel
+    success_url = reverse_lazy('index')
+

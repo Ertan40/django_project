@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'kinomania.common',
     'kinomania.movies',
     'kinomania.halls',
+    'kinomania.projection',
 ]
 
 MIDDLEWARE = [

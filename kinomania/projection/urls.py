@@ -1,4 +1,7 @@
 from django.urls import path
+from kinomania.projection.views import DisplayProjectionView
 
 
-urlpatterns = []
+urlpatterns = [
+    path("", DisplayProjectionView.as_view(), name="projection index"),
+]

@@ -4,6 +4,8 @@ from django.views import generic as views
 from kinomania.projection.models import Projection
 from kinomania.projection.helpers import get_days, get_today_movies, get_seats
 import datetime
+from django.urls import reverse_lazy
+from kinomania.projection.forms import ProjectionCreateForm
 # Create your views here.
 
 
@@ -36,3 +38,12 @@ class DisplayProjectionByDayView(views.ListView):
         context['current_day'] = get_today_movies(self.kwargs['day'])
         context['current_day_date'] = self.kwargs['day']
         return context
+
+
+
+class CreateProjectionView(views.CreateView):
+    permission_required = "projection.add_projection"
+    login_url = "profile/login"
+    template_name = "projections/add-projection.html"
+    success_url = reverse_lazy("projection index")
+    form_class = ProjectionCreateForm

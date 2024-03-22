@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{#{% load static %}#}
+
+{% block page_content %}
+
+{% block style %}
+<style>
+   .no-movies {
+       margin-top: 1.3rem;
+       margin-right: 2rem;
+       color: #3BC8A1;
+   }
+   .movie-img {
+        width: 150px;
+        height: 200px;
+        margin: auto;
+   }
+   .days-nav li:hover, a:hover {
+       background-color: #3BC8A1;
+       cursor: pointer;
+   }
+   :hover {
+       color: black;
+   }
+   .display-main {
+       display: flex;
+       justify-content: center;
+       flex-direction: column;
+       align-items: center;
+       margin: auto;
+   }
+
+   .display-hours {
+       display: flex;
+       flex-direction: column;
+       margin-bottom: 1rem;
+       border-bottom: 2px solid #3BC8A1;
+   }
+
+   .projection-list {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       width: 600px;
+       margin-top: 0.5rem;
+       text-align: center;
+}
+
+</style>
+{%  endblock %}
+
+    <div class="display-main">
+        <ul class="days-nav">
+        {% for day in days %}
+            {% if day|date:"Y-m-d" == current_day_date %}
+                <li class="active-day">
+                    <a href="{% url 'projection day'  day|date:"Y-m-d" %}">{{ day|date:"D d.m." }}</a>
+                </li>
+            {% else %}
+            <li><a href="{% url 'projection day' day=day|date:"Y-m-d" %}">{{ day|date:"D d.m." }}</a></li>
+            {% endif %}
+
+        {% endfor %}
+        </ul>
+        <div class="projection-list">
+        {% if current_day  %}
+            {% for movie_name, data in current_day.items %}
+                <div class="movie-img">
+                    <img src="{{ data.movie.image.url }}" alt="{{ data.movie.name }} - image">
+                </div>
+{#             <img src="{{ data.movie.image.url }}" alt="{{ data.movie.name }} - image" class="movie-img">#}
+                <div class="movie-details">
+                    <a href="{% url "movies" id=data.movie.pk %}">
+                        <h3>{{ data.movie.name }}</h3>
+                    </a>
+                        <p>{{ data.movie.rating }}</p>
+                        <p>{{ data.movie.genres }}</p>
+                </div>
+                <div class="display-hours">
+                    {% for hour, pr in data.hours.items %}
+                        {% if pr.free_seats == "No free seats" %}
+                            <a class="hour-projection">
+                                <p class="hour no-free-seats">{{ hour|time:'H:i' }}</p>
+                                <p class="free-seats no-free-seats">{{ pr.free_seats }}</p>
+                            </a>
+                        {% else %}
+                            <a class="hour-projection" href="{% url 'save projection' pk=pr.projection.pk %}">
+                                <p class="hour">{{ hour|time:'H:i' }}</p>
+                                <p class="free-seats">{{ pr.free_seats }}</p>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+            {% endfor %}
+        {% else %}
+            <h2 class="no-movies">No movies this day</h2>
+        {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}

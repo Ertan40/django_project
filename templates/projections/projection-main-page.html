@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{#{% load static %}#}
+
+{% block page_content %}
+
+{% block style %}
+<style>
+
+   .days-nav {
+       margin: 1rem auto;
+   }
+   .days-nav li:hover, a:hover {
+       background-color: #3BC8A1;
+       cursor: pointer;
+   }
+   :hover {
+       color: black;
+   }
+
+</style>
+{%  endblock %}
+
+    <ul class="days-nav">
+        {% for day in days %}
+            {% if day|date:"Y-m-d" == current_day_date %}
+                <li class="active-day">
+                    <a href="{% url 'projection day'  day|date:"Y-m-d" %}">{{ day|date:"D d.m." }}</a>
+                </li>
+            {% else %}
+            <li><a href="{% url 'projection day' day=day|date:"Y-m-d" %}">{{ day|date:"D d.m." }}</a></li>
+            {% endif %}
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}

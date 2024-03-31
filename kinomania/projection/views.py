@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic as views
-from kinomania.projection.models import Projection
+from kinomania.projection.models import Projection, Seat
 from kinomania.projection.helpers import get_days, get_today_movies, get_seats
 import datetime
 from django.urls import reverse_lazy
@@ -47,3 +47,18 @@ class CreateProjectionView(views.CreateView):
     template_name = "projections/add-projection.html"
     success_url = reverse_lazy("projection index")
     form_class = ProjectionCreateForm
+
+
+
+class ProjectionDetailsView(views.DetailView):
+    model = Projection
+    template_name = "projections/projection-details-page.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["seats"] = get_seats(self.object)
+        context["free_seats"] = Seat.objects.filter(projection_id=self.object.id, is_taken=0).count()
+        return context
+
+
+

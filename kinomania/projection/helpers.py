@@ -1,8 +1,6 @@
 import datetime
-
 from kinomania.movies.models import Movie
 from kinomania.projection.models import Projection, Seat
-
 
 
 def create_seats(hall):
@@ -16,20 +14,25 @@ def create_seats(hall):
     return seats
 
 
-
 def get_seats(instance):
-    seats = Seat.objects.filter(projection_id=instance.id).order_by("seat_n", "row_n")
+    seats = Seat.objects.filter(projection_id=instance.id).order_by("row_n", "seat_n")
     final_seats = []
     new_row = []
-    for row in range(0, instance.hall.rows * instance.hall.seats_per_row):
-        if row % instance.hall.rows != 0:
-            new_row.append(seats[row])
-        else:
-            new_row.append(seats[row])
+    rows = instance.hall.rows
+    seats_per_row = instance.hall.seats_per_row
+
+    for index, seat in enumerate(seats, start=1):
+        new_row.append(seat)
+        if index % seats_per_row == 0:
             final_seats.append(new_row)
             new_row = []
 
+    # Append the last row if it's not fully occupied
+    if new_row:
+        final_seats.append(new_row)
+
     return final_seats
+
 
 
 def find_free_seats(projection_pk):

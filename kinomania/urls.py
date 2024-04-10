@@ -10,6 +10,7 @@ urlpatterns = [
     path('movies/', include('kinomania.movies.urls')),
     path('halls/', include('kinomania.halls.urls')),
     path('projection/', include('kinomania.projection.urls')),
+    path('tickets/', include('kinomania.tickets.urls')),
 ]
 
 

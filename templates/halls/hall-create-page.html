@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+{#{% block style %}#}
+{#    <style>#}
+{#        .logos {#}
+{#            height: auto;#}
+{#        }#}
+{#    </style>#}
+{#{% endblock %}#}
+    <form action="{% url 'create hall' %}" method="post" class="input-forms">
+        <h3>Create hall</h3>
+        <p>Name:</p>
+        {{ form.name }}
+        <p>Rows:</p>
+        {{ form.rows }}
+        <p>Seats per row:</p>
+        {{ form.seats_per_row }}
+        <p>Description:</p>
+        {{ form.description }}
+        <p>Image:</p>
+        {{ form.image }}
+        {% csrf_token %}
+        <div class="create-hall-button">
+            <button>Create hall</button>
+        </div>
+
+    </form>
+
+{% endblock %}

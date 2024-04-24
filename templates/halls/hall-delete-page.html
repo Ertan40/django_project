@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+{#{% block style %}#}
+{#    <style>#}
+{#        .logos {#}
+{#            height: auto;#}
+{#        }#}
+{#    </style>#}
+{#{% endblock %}#}
+    <form action="{% url 'delete hall' pk=object.pk slug=object.slug %}" method="post" class="input-forms">
+        <h3>Are you sure? You want to delete current hall?</h3>
+        {% csrf_token %}
+        <div class="delete-hall-button">
+            <button>Delete hall</button>
+        </div>
+
+    </form>
+
+{% endblock %}

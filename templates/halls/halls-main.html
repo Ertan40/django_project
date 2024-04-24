@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load multiply %}
+{#{% load static %}#}
+
+{% block page_content %}
+
+{% block style %}
+<style>
+
+   .hall-img {
+       width: 220px;
+       height: auto;
+       margin-left: 1rem;
+   }
+
+</style>
+{%  endblock %}
+
+    {% if halls %}
+    {% for hall in halls %}
+       <a class="one-hall" href="{% url 'hall details'  pk=hall.pk  slug=hall.slug %}">
+           <h2>{{ hall.name }}</h2>
+           <p>Number of seats: {{ hall.rows|multiply:hall.seats_per_row }}</p>
+           <img src="{{ hall.image.url }}" alt="{{ hall.name }}-image" class="hall-img">
+       </a>
+    {% endfor %}
+    {% else %}
+        <h1>No halls found</h1>
+    {% endif %}
+
+{% endblock %}

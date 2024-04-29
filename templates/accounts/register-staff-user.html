@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load placeholders %}
+
+
+{% block page_content %}
+    {% if request.user.is_staff %}
+        <form action="{% url 'register staff user' %}" method="post">
+        <h3>Register Staff User</h3>
+        <p>Username:</p>
+        {{ form.username }}
+        <p>Email:</p>
+        {{ form.email }}
+        <p>Password:</p>
+        {{ form.password }}
+        <p>Groups:</p>
+        {{ form.groups }}
+        {% csrf_token %}
+        <div class="register-button">
+            <button>Register</button>
+        </div>
+    </form>
+
+    {% else %}
+        <h2>You do not have rights.</h2>
+    {% endif %}
+
+{% endblock %}

@@ -1,20 +1,40 @@
 {% load static %}
 
+{% block style %}
+    <style>
+        nav ul li:hover, a:hover{
+            cursor: pointer;
+            background-color: #56DBB1;
+        }
+        :hover {
+            color: black;
+        }
+    </style>
 
+{% endblock %}
 <nav>
     <div class="brand">
 {#           <h1><a href="{% url "index" %}">KinoMania</a></h1>#}
 {#           <a href="{% url "index" %}"><h1>KinoMania</h1></a>#}
            <h1>KinoMania</h1>
-           <h6>By Ertan</h6>
+           <h6>By SoftUni</h6>
 
     </div>
     <ul role="list">
         <li><a href="{% url "index" %}">Homepage</a></li>
-        <li><a href="{% url "login user" %}">Login</a></li>
-        <li><a href="{% url "register user" %}">Register</a></li>
-        <li><a href="#">Movies</a></li>
-        <li><a href="#">Tickets</a></li>
-        <li><a href="#">Seats</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="#">{{ request.user }}</a></li>
+            <li><a href="{% url "logout user" %}">Logout</a></li>
+            <li><a href="{% url "delete user" pk=request.user.pk %}">Delete</a></li>
+            <li><a href="{% url "edit user" pk=request.user.pk %}">Edit</a></li>
+
+        {% else %}
+            <li><a href="{% url "login user" %}">Login</a></li>
+            <li><a href="{% url "register user" %}">Register</a></li>
+        {% endif %}
+            <li><a href="{% url "catalogue" %}">Movies</a></li>
+            <li><a href="{% url "tickets index" %}">Tickets</a></li>
+            <li><a href="{% url "hall index" %}">Halls</a></li>
+            <li><a href="{% url "projection index" %}">Projections</a></li>
     </ul>
 </nav>

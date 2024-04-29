@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load placeholders %}
+
+
+{% block page_content %}
+
+    <form action="{% url 'edit user' pk=request.user.pk %}" method="post">
+        <h3>You can edit your profile:</h3>
+        <p>First name:</p>
+        {{ form.first_name }}
+        <p>Last name:</p>
+        {{ form.last_name }}
+        <p>Email:</p>
+        {{ form.email }}
+        <p>Age:</p>
+        {{ form.age }}
+        {% csrf_token %}
+        <div class="edit-button">
+            <button>Edit</button>
+        </div>
+    </form>
+
+
+{% endblock %}

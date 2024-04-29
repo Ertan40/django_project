@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load placeholders %}
+
+
+{% block page_content %}
+
+
+        <h3>User details:</h3>
+        <p>Username:</p>
+        {{ object.username }}
+    {% if object.get_full_name %}
+        <p>Name: {{ object.get_full_name }}</p>
+    {% endif %}
+
+    {% if is_owner %}
+        <p>Email: {{ object.email }}</p>
+        {% if  object.age %}
+            <p>Age: {{ object.age }}</p>
+        {% endif %}
+        <p>Type user:
+            {% if object.is_staff %}
+                staff
+            {% else %}
+                regular
+            {% endif %}
+        </p>
+        <p>
+            <a class="edit-link" href="{% url 'edit user' pk=object.pk %}">
+                <button type="submit" class="btn btn-primary">Edit</button></a>
+
+            <a class="delete-link" href="{% url 'delete user' pk=object.pk %}">
+                <button type="submit" class="btn btn-primary">Delete</button></a>
+        </p>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+{% block style %}
+<style>
+
+   .movie-hall {
+       display: flex;
+       justify-content: center;
+       flex-direction: column;
+       margin: auto;
+   }
+</style>
+{%  endblock %}
+    {{ object.hall }}
+    {{ object.hour|time:"H:i" }}
+    {{ object.date|date:"d-m-Y" }}
+    {{ object.movie }}
+    <div class="movie-hall">
+        <div class="movie-screen">Movie Screen</div>
+            <p>Free seats: {{ free_seats }}</p>
+            {% for row in seats %}
+                <div>
+                    <span class="row-seat seat">
+                        <p>row:</p>
+                        <p>{{ forloop.counter }}</p>
+                    </span>
+                    {% for seat in row %}
+                        {% if seat.is_taken %}
+                            <span class="taken-seat seat" data-pk={{ seat.pk }} data-row={{ seat.row_n }}
+                                  data-seat={{ seat.seat_n }}>
+                               <p>seat:</p>
+                               <p>{{ seat.seat_n }}</p>
+                            </span>
+                        {% else %}
+                            <span class="free-seat seat" data-pk={{ seat.pk }} data-row={{ seat.row_n }}
+                                  data-seat={{ seat.seat_n }}>
+                                <p>seat:</p>
+                                <p>{{ seat.seat_n }}</p>
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+    </div>
+
+{% endblock %}

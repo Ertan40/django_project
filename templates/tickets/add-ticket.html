@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+{#{% block style %}#}
+{#    <style>#}
+{#        .logos {#}
+{#            height: auto;#}
+{#        }#}
+{#    </style>#}
+{#{% endblock %}#}
+    <form action="{% url 'add ticket' %}" method="post" class="input-forms">
+        {% csrf_token %}
+        <h3>Add new ticket</h3>
+        <p>Ticket type:</p>
+        {{ form.ticket_type }}
+        <p>Price:</p>
+        {{ form.price }}
+        <p>Weekend price:</p>
+        {{ form.weekend_price }}
+        <div class="addticket-button">
+            <button>Add ticket</button>
+        </div>
+
+    </form>
+
+{% endblock %}

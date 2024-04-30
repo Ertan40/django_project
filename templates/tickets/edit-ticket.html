@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+{#{% block style %}#}
+{#    <style>#}
+{#        .logos {#}
+{#            height: auto;#}
+{#        }#}
+{#    </style>#}
+{#{% endblock %}#}
+    <form action="{% url 'edit ticket' pk=ticket.pk %}" method="post" class="input-forms">
+        <h3>Edit ticket</h3>
+        <p>Ticket type:</p>
+        {{ form.ticket_type }}
+        <p>Price:</p>
+        {{ form.price }}
+        <p>Weekend price:</p>
+        {{ form.weekend_price }}
+        {% csrf_token %}
+        <div class="editticket-button">
+            <button>Edit ticket</button>
+        </div>
+
+    </form>
+
+{% endblock %}

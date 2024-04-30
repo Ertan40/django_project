@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+{% block style %}
+<style>
+   .container {
+       display: flex;
+       align-items: center;
+       flex-direction: column;
+       margin: auto;
+   }
+   img {
+        width: 150px;
+        height: 200px;
+        margin: auto;
+   }
+   .display-reservation {
+       text-align: center;
+       width: 600px;
+       margin: 40px auto 60px auto;
+   }
+
+   .movie-details {
+       padding: 10px;
+       border-bottom: 1px solid #56DBB1;
+   }
+
+
+</style>
+{% endblock %}
+
+<div class="container">
+    <h1>Would you like to make a reservation: </h1>
+    <div class="display-reservation">
+        <div class="display-movie">
+            <img src="{{ projection.movie.image.url }}" alt="{{ projection.movie.name }} - image">
+        </div>
+        <div class="movie-details">
+            <a href="{% url "movies" id=projection.movie.pk %}">
+                <h3>{{ projection.movie.name }}</h3>
+            </a>
+            <p>{{ projection.movie.rating }}</p>
+            <p>{{ projection.movie.genres }}</p>
+            <p>Date: {{ projection.date|date:"d-m-Y" }}</p>
+            <p>Hour: {{ projection.hour|time:'H:i' }}</p>
+            <p>Hall: {{ projection.hall }}</p>
+        </div>
+    </div>
+    <form method="post" action="" class="form-reservation">
+        {% csrf_token %}
+        <button>Confirm</button>
+
+    </form>
+    <h3>Available seats:</h3>
+    <div class="cinema-hall">
+        <div class="cinema-screen">CINEMA SCREEN</div>
+        <p class="free-seat-info">Free seats: {{ free_seats }}</p>
+    </div>
+</div>
+
+{% endblock %}

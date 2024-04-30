@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+{% block style %}
+<style>
+   .container {
+       display: flex;
+       align-items: center;
+       flex-direction: column;
+       margin: auto;
+   }
+   .display-tickets {
+       text-align: center;
+       width: 600px;
+       margin: 40px auto 60px auto;
+       border: 2px solid #FFF;
+   }
+
+   .ticket-table {
+       width: 100%;
+       border-collapse: collapse;
+   }
+
+   .ticket-table th, .ticket-table td {
+       padding: 10px;
+       border-bottom: 1px solid #FFF;
+   }
+
+   .ticket-table th {
+       background-color: #f0f0f0;
+       font-weight: bold;
+   }
+   tbody td {
+       color: #FFF;
+       text-align: center;
+   }
+</style>
+{% endblock %}
+
+<div class="container">
+    <h1>Ticket prices</h1>
+    <div class="display-tickets">
+        {% if request.user.is_staff %}
+            <table class="ticket-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Weekdays</th>
+                    <th>Weekend</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in object_list %}
+                <tr>
+                    <td>{{ ticket.ticket_type }}</td>
+                    <td>${{ ticket.price }}</td>
+                    <td>${{ ticket.weekend_price }}</td>
+                    <td>
+                        <a class="edit-user" href="{% url 'edit ticket' pk=ticket.pk %}"><i class="fa-solid fa-pencil"></i></a>
+                        <a class="edit-user" href="{% url 'delete ticket' pk=ticket.pk %}"><i class="fa-solid fa-trash-can"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        {% else %}
+            <table class="ticket-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Weekdays</th>
+                    <th>Weekend</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in object_list %}
+                <tr>
+                    <td>{{ ticket.ticket_type }}</td>
+                    <td>${{ ticket.price }}</td>
+                    <td>${{ ticket.weekend_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+

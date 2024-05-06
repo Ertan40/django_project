@@ -13,34 +13,56 @@ def create_seats(hall):
 
     return seats
 
-
 def get_seats(instance):
     seats = Seat.objects.filter(projection_id=instance.id).order_by("row_n", "seat_n")
     final_seats = []
-    new_row = []
-    rows = instance.hall.rows
-    seats_per_row = instance.hall.seats_per_row
+    current_row = []
+    current_row_number = None
 
-    for index, seat in enumerate(seats, start=1):
-        new_row.append(seat)
-        if index % seats_per_row == 0:
-            final_seats.append(new_row)
-            new_row = []
+    for seat in seats:
+        if seat.row_n != current_row_number:
+            if current_row:
+                final_seats.append(current_row)
+            current_row = [seat]
+            current_row_number = seat.row_n
+        else:
+            current_row.append(seat)
 
-    # Append the last row if it's not fully occupied
-    if new_row:
-        final_seats.append(new_row)
+    if current_row:
+        final_seats.append(current_row)
 
-    return final_seats
+    free_seats = Seat.objects.filter(projection_id=instance.id, is_taken=0).count()
+    taken_seats = Seat.objects.filter(projection_id=instance.id, is_taken=1).count()
+    total_seats = instance.hall.rows * instance.hall.seats_per_row - taken_seats
+    return final_seats, free_seats, total_seats, seats
 
+# def get_seats(instance):
+#     seats = Seat.objects.filter(projection_id=instance.id).order_by('row_n', 'seat_n')
+#     final_seats = []
+#     new_row = []
+#     total_seats_count = instance.hall.rows * instance.hall.seats_per_row
+#     for row in range(0, total_seats_count):
+#         if row < len(seats):
+#             new_row.append(seats[row])
+#         else:
+#             # Handle the case when the index is out of range
+#             new_row.append(None)  # Or any value that represents an empty seat
+#         if len(new_row) == instance.hall.seats_per_row:
+#             final_seats.append(new_row)
+#             new_row = []
+#
+#     free_seats = Seat.objects.filter(projection_id=instance.id, is_taken=0).count()
+#     taken_seats = Seat.objects.filter(projection_id=instance.id, is_taken=1).count()
+#     total_seats = instance.hall.rows * instance.hall.seats_per_row - taken_seats
+#     return final_seats, free_seats, total_seats, seats
 
 
 def find_free_seats(projection_pk):
     free_seats = Seat.objects.filter(projection_id=projection_pk, is_taken=0).count()
     if free_seats > 0:
         return f"{free_seats} free seats"
-    return "No free seats"
-
+    else:
+        return "No free seats"
 
 
 def get_today_movies(day):

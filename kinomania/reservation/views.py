@@ -28,11 +28,15 @@ def create_reservation(request):
         request.session["projection_pk"] = reservation.pk
         return redirect("reservation step one")
 
-    context = {"form": form, "projection": projection, "seats": get_seats(projection),
-               "free_seats": Seat.objects.filter(projection_id=projection_pk, is_taken=0).count()}
+    # context = {"form": form, "projection": projection, "seats": get_seats(projection),
+    #            "free_seats": Seat.objects.filter(projection_id=projection_pk, is_taken=0).count()}
+    #
+    # return render(request, "reservations/reservation-start-page.html", context)
+    seats, free_seats, total_seats, final_seats = get_seats(projection)
+    context = {"form": form, "projection": projection, "seats": seats,
+               "free_seats": free_seats, "total_seats": total_seats, "final_seats": final_seats}
 
     return render(request, "reservations/reservation-start-page.html", context)
-
 
 class ReservationStepOneView(LoginRequiredMixin, views.UpdateView):
     login_url = "/profile/login/"
@@ -49,6 +53,17 @@ class ReservationStepOneView(LoginRequiredMixin, views.UpdateView):
                 return obj
 
         raise Http404("No reservation found matching the query")
+
+    def get_success_url(self):
+        return reverse("reservation step two")
+
+    def get_context_data(self, **kwargs):
+        projection = Projection.objects.filter(pk=self.object.projection.id).get()
+        context = super().get_context_data(**kwargs)
+        context["tickets"] = Ticket.objects.all()
+        context["free_seats"] = Seat.objects.filter(projection_id=projection.id, is_taken=0).count()
+        context["weekdays"] = True if self.object.projection.date.weekday() < 5 else False
+        return context
 
 
 

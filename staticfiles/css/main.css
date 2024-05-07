@@ -35,6 +35,7 @@ img {
     height: 100%;
     width: 100%;
 }
+
 .brand h6 {
     font-size: 0.6rem;
     color: grey;
@@ -45,16 +46,17 @@ img {
     padding-right: 2rem;
     color: #1b1b1b;
 }
-nav ul li:nth-child(1) {
-    background-color: #56DBB1;
-}
-nav ul li:nth-child(1) a {
-    color: black;
-}
-header div:last-child {
-    background-color: #56DBB1;
-    text-align: center;
-}
+/*nav ul li:nth-child(1) {*/
+/*    background-color: #56DBB1;*/
+/*}*/
+/*nav ul li:nth-child(1) a {*/
+/*    color: black;*/
+/*}*/
+/*header div:last-child {*/
+/*    background-color: #56DBB1;*/
+/*    text-align: center;*/
+/*    color: #ffffff;*/
+/*}*/
 header div:last-child p {
     font-size: 0.8rem;
     padding: 2.4rem 8rem;
@@ -66,8 +68,15 @@ header div:last-child p {
     text-align: center;
     width: 100%;
     background-color: rgb(56 56 56);
-    height: 320px;
     color: #fff;
+    /*height: 320px;*/
+    /*changes made:*/
+    /*position: relative;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    box-sizing: border-box;
+    height: auto;
+
 }
 .article {
     padding-top: 4rem;
